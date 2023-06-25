@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ludo</title>
+  <style>
+    .ludo-board {
+      width: 480px;
+      height: 480px;
+      border: 2px solid black;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: white;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+    }
+
+    .cell {
+      flex: 1;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="ludo-board">
+    <div class="row">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+    <div class="row">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+    <div class="row">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+    <div class="row">
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+      <div class="cell"></div>
+    </div>
+  </div>
+
+  <button id="roll-dice-btn">Roll dice</button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      const rollDiceBtn = document.getElementById('roll-dice-btn');
+      const cells = document.querySelectorAll('.cell');
+      let currentCellIndex = -1;
+
+      rollDiceBtn.addEventListener('click', rollDice);
+
+      function rollDice() {
+        const diceValue = Math.floor(Math.random() * 6) + 1;
+        console.log('Dice rolled:', diceValue);
+
+        if (currentCellIndex !== -1) {
+          cells[currentCellIndex].classList.remove('highlight');
+        }
+
+        currentCellIndex = (currentCellIndex + diceValue) % cells.length;
+
+        cells[currentCellIndex].classList.add('highlight');
+      }
+    });
+  </script>
+</body>
+</html>
